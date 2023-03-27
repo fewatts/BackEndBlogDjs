@@ -53,18 +53,20 @@ public class PostagemController {
 
 	@PostMapping
 	public ResponseEntity<Postagem> post(@Valid @RequestBody Postagem postagem) {
-		if(temaRepository.existsById(postagem.getTema().getId()))
+		if(temaRepository.existsById(postagem.getTema().getId())){
 			return ResponseEntity.status(HttpStatus.CREATED)
 				.body(postagemRepository.save(postagem));
+		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
 
 	@PutMapping
 	public ResponseEntity<Postagem> put(@Valid @RequestBody Postagem postagem) {
 		if(postagemRepository.existsById(postagem.getId())){
-			if(temaRepository.existsById(postagem.getTema().getId()))
+			if(temaRepository.existsById(postagem.getTema().getId())){
 				return ResponseEntity.status(HttpStatus.OK)
 						.body(postagemRepository.save(postagem));
+			}
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -74,9 +76,10 @@ public class PostagemController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id){
 		Optional<Postagem> postagem = postagemRepository.findById(id);	
-		if(postagem.isEmpty())
+		if(postagem.isEmpty()){
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-		
+		}
+		postagemRepository.deleteById(id);
 	}
 
 }

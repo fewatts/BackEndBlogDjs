@@ -19,27 +19,27 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name = "tb_postagens")
 public class Postagem {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	
-	@NotBlank(message = "O atributo título é obrigatório!")
-	@Size(min = 5, max = 100, message = "O atributo título deve conter no mínimo 5 e no máximo 100 caracteres!")
-	private String titulo;
-	
-	@NotBlank(message = "O atributo texto é obrigatório!")
-	@Size(min = 10, max = 100, message = "O atributo texto deve conter no mínimo 10 e no máximo 100 caracteres!")
-	private String texto;
-	
-	@UpdateTimestamp
-	private LocalDateTime data;
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
+		private long id;
+		
+		@NotBlank(message = "O atributo título é obrigatório!")
+		@Size(min = 5, max = 100, message = "O atributo título deve conter no mínimo 5 e no máximo 100 caracteres!")
+		private String titulo;
+		
+		@NotBlank(message = "O atributo texto é obrigatório!")
+		@Size(min = 10, max = 100, message = "O atributo texto deve conter no mínimo 10 e no máximo 100 caracteres!")
+		private String texto;
+		
+		@UpdateTimestamp
+		private LocalDateTime data;
 
 	@ManyToOne
-	@JsonIgnoreProperties("postagem")
-	private Tema tema;
+		@JsonIgnoreProperties("postagem")
+		private Tema tema;
 
 	@ManyToOne
-    @JsonIgnoreProperties("postagem")
-    private Usuario usuario;
+		@JsonIgnoreProperties("postagem")
+		private Usuario usuario;
 
 	public long getId() {
 		return id;
@@ -80,5 +80,13 @@ public class Postagem {
 	public void setTema(Tema tema) {
 		this.tema = tema;
 	}
-	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 }

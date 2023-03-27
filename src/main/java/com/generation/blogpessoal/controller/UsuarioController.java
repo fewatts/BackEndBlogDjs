@@ -73,9 +73,9 @@ public class UsuarioController {
     public void delete(@PathVariable Long id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         
-        if(usuario.isEmpty())
+        if(usuario.isEmpty()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        
+        }
         usuarioRepository.deleteById(id);              
     }
     

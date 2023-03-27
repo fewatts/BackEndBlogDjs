@@ -17,15 +17,15 @@ import java.util.List;
 @Table(name = "tb_temas")
 public class Tema {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
 
-    @NotNull(message = "O atributo descrição é obrigatório!")
-    private String descricao;
+        @NotNull(message = "O atributo descrição é obrigatório!")
+        private String descricao;
 
     @OneToMany(mappedBy = "tema", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties("tema")
-    private List<Postagem> postagem;
+        @JsonIgnoreProperties("tema")
+        private List<Postagem> postagem;
 
     public Long getId() {
         return id;
@@ -43,5 +43,12 @@ public class Tema {
         this.descricao = descricao;
     }
 
+    public List<Postagem> getPostagem() {
+        return postagem;
+    }
+
+    public void setPostagem(List<Postagem> postagem) {
+        this.postagem = postagem;
+    }
 
 }
