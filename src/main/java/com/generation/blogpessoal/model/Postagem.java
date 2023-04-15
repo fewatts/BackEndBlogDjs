@@ -29,6 +29,9 @@ public class Postagem {
 		@NotBlank(message = "O atributo texto é obrigatório!")
 		@Size(min = 10, max = 100, message = "O atributo texto deve conter no mínimo 10 e no máximo 100 caracteres!")
 		private String texto;
+
+		@Size(max = 5000, message = "O link do set não pode ser maior do que 5000 caracteres")
+		private String link;
 		
 		@UpdateTimestamp
 		private LocalDateTime data;
@@ -63,6 +66,14 @@ public class Postagem {
 
 	public void setTexto(String texto) {
 		this.texto = texto;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 	public LocalDateTime getData() {
