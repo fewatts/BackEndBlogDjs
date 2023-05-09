@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 
 
 import com.generation.blogpessoal.model.UsuarioLogin;
@@ -64,6 +68,16 @@ public class UsuarioController {
         return usuarioService.atualizarUsuario(usuario)
             .map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
             .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
+        
+        if(usuario.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        usuarioRepository.deleteById(id);              
     }
     
 }
